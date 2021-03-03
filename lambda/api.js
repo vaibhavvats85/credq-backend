@@ -9,7 +9,7 @@ require("dotenv").config();
 
 // Configure MongoDB connection
 const mongoose = require("mongoose");
-const uri = `mongodb+srv://credq:${process.env.MONGO_SECRET}@cluster0.sxev6.mongodb.net/credq?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://credq:${process.env.MONGO_SECRET}@cluster0.sxev6.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`;
 mongoose.connect(uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -26,10 +26,10 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('functions/authenticate',require('./routes/user'));
+app.use('/.netlify/functions/api',require('../routes/user'));
 
 //Setup Error Handlers
-const errorHandlers = require("./handlers/errorHandlers");
+const errorHandlers = require("../handlers/errorHandlers");
 app.use(errorHandlers.notFound);
 app.use(errorHandlers.mongoseErrors);
 if (process.env.ENV === "DEVELOPMENT") {

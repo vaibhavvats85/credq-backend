@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "start-dev": "nodemon"
+    "start": "netlify-lambda serve lambda",
+    "start-dev": "nodemon",
+    "build": "netlify-lambda serve lambda"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,9 @@
     "jwt-then": "^1.0.1",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.27",
-    "nodemon": "^2.0.4"
+    "netlify-lambda": "^2.0.3",
+    "nodemon": "^2.0.4",
+    "serverless-http": "^2.7.0"
   },
   "homepage": "https://github.com/vaibhavvats85/credq-backend#readme"
 }
