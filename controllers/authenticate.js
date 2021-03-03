@@ -4,12 +4,10 @@ const jwt = require("jwt-then");
 
 exports.login = async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
     const user = await User.findOne({
         username,
         password,
     });
-    console.log(user)
 
     if (!user) throw "Email and Password did not match.";
 

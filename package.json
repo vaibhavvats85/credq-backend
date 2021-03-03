@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "netlify-lambda serve lambda",
     "start-dev": "nodemon",
-    "build": "netlify-lambda serve lambda"
+    "build": "netlify-lambda build lambda"
   },
   "repository": {
     "type": "git",
