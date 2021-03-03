@@ -10,6 +10,7 @@ require("dotenv").config();
 // Configure MongoDB connection
 const mongoose = require("mongoose");
 const uri = `mongodb+srv://credq:${process.env.MONGO_SECRET}@cluster0.sxev6.mongodb.net/credq?retryWrites=true&w=majority`;
+console.log(uri);
 mongoose.connect(uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
