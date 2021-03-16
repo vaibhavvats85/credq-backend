@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                domain: 'localhost'
+                domain: '.credq.org'
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
@@ -74,7 +74,7 @@ exports.logout = (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: 'localhost'
+            domain: '.credq.org'
         });
         res.status(200).send('Logout Successful');
     });
