@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                domain: '.credq.org'
+                domain: 'localhost'
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
@@ -70,12 +70,11 @@ exports.logout = (req, res) => {
     const token = cookieToken(req);
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-        res.cookie(constants.jwt_identifier, null, {
-            maxAge: 0,
+        res.clearCookie(constants.jwt_identifier, {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: '.credq.org'
+            domain: 'localhost'
         });
         res.status(200).send('Logout Successful');
     });
