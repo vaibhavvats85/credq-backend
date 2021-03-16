@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 });
 router.post("/login", catchErrors(authenticationController.login));
 router.get("/authenticate", catchErrors(authenticationController.authenticate));
-router.get("/logout", authenticationController.login);
+router.get("/logout", authenticationController.logout);
 router.post("/payment/orders", catchErrors(payment.orders));
 router.post("/payment/success", payment.success);
 router.post("/invoices", invoices.invoices);

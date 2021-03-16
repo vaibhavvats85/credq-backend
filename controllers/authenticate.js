@@ -64,7 +64,11 @@ exports.authenticate = async (req, res) => {
     })
 };
 
-exports.logout = async (req, res) => {
-    res.clearCookie(constants.jwt_identifier);
-    res.send('Cookie deleted');
+exports.logout = (req, res) => {
+    const token = cookieToken(req);
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+        res.clearCookie(constants.jwt_identifier);
+        res.sattus(200).send('Logout Successful');
+    });
 };
