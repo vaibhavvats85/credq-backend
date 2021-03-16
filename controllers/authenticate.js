@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
 
 exports.authenticate = async (req, res) => {
     const token = cookieToken(req);
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+    if (!token) return res.status(401).send('Resource Unauthorized');
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
         User.findById(decoded.id, { password: 0 }, function (err, user) {
@@ -65,10 +65,16 @@ exports.authenticate = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
+    console.log(req.headers)
     const token = cookieToken(req);
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-        res.clearCookie(constants.jwt_identifier);
-        res.sattus(200).send('Logout Successful');
+        res.cookie(constants.jwt_identifier, null, {
+            maxAge: 0,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        });
+        res.status(200).send('Logout Successful');
     });
 };
