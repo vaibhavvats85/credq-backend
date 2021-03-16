@@ -32,7 +32,8 @@ exports.login = async (req, res) => {
                 maxAge: 86400 * 1000,
                 httpOnly: true,
                 secure: true,
-                sameSite: 'None'
+                sameSite: 'None',
+                domain: '.credq.org'
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
@@ -73,7 +74,8 @@ exports.logout = (req, res) => {
             maxAge: 0,
             httpOnly: true,
             secure: true,
-            sameSite: 'None'
+            sameSite: 'None',
+            domain: '.credq.org'
         });
         res.status(200).send('Logout Successful');
     });
