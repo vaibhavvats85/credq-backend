@@ -32,6 +32,7 @@ exports.login = async (req, res) => {
                 maxAge: 86400 * 1000,
                 httpOnly: true,
                 secure: true,
+                sameSite: 'None'
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
@@ -61,4 +62,9 @@ exports.authenticate = async (req, res) => {
             });
         });
     })
+};
+
+exports.logout = async (req, res) => {
+    res.clearCookie(constants.jwt_identifier);
+    res.send('Cookie deleted');
 };
