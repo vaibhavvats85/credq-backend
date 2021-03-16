@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "netlify-lambda serve lambda",
-    "start-dev": "nodemon",
+    "start-dev": "nodemon server.js",
     "build": "netlify-lambda build lambda"
   },
   "repository": {
@@ -19,14 +19,21 @@
     "url": "https://github.com/vaibhavvats85/credq-backend/issues"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.13",
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "jwt-then": "^1.0.1",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.27",
+    "nanoid": "^3.1.20",
     "netlify-lambda": "^2.0.3",
     "nodemon": "^2.0.4",
+    "pdf-creator-node": "^1.4.2",
+    "razorpay": "^2.0.6",
     "serverless-http": "^2.7.0"
   },
   "homepage": "https://github.com/vaibhavvats85/credq-backend#readme"
