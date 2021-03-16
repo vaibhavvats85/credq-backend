@@ -77,6 +77,5 @@ exports.logout = (req, res) => {
             domain: '.credq.org'
         });
         req.session.destroy();
-        res.status(200).send('Logout Successful');
     });
 };
