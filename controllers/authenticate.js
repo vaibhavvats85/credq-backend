@@ -32,7 +32,6 @@ exports.login = async (req, res) => {
                 maxAge: 86400 * 1000,
                 httpOnly: true,
                 secure: true,
-                domain: '127.0.0.1',
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
