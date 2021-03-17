@@ -6,15 +6,15 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 
 require("dotenv").config();
+let origin = [
+  "https://credq.org",
+  "https://beta.credq.org",
+  "https://frontend-dev.credq.org"
+];
+if (process.env.ENV === 'DEVELOPMENT') origin.push("http://localhost:3000");
 const corsOptions = {
   //To allow requests from client
-  origin: [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "https://credq.org",
-    "https://beta.credq.org",
-    "https://frontend-dev.credq.org"
-  ],
+  origin: origin,
   credentials: true,
 };
 

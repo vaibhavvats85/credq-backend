@@ -5,6 +5,7 @@ const constants = require('../utils/constants');
 const { cookieToken } = require("../utils/service");
 const crypto = require('crypto');
 
+const domain = process.env.ENV === 'DEVELOPMENT' ? null : '.credq.org';
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     const shasum = crypto.createHmac("sha256", process.env.SECRET);
@@ -33,7 +34,7 @@ exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                domain: '.credq.org'
+                domain: domain
             });
             User.findById(user.id, { password: 0, _id: 0, userid: 0 }, (err, loggedInUser) => {
                 res.json({
@@ -74,7 +75,7 @@ exports.logout = (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: '.credq.org'
+            domain: domain
         });
         req.session.destroy();
     });
