@@ -4,14 +4,37 @@ const jwt = require("jsonwebtoken");
 const constants = require('../utils/constants');
 const { cookieToken } = require("../utils/service");
 const crypto = require('crypto');
+const { nanoid } = require('nanoid');
 
 const domain = process.env.ENV === 'DEVELOPMENT' ? null : '.credq.org';
+
+exports.register = async (req, res) => {
+    const password = nanoid(10).replace(/[-_]/gi, '');
+    const shasum = crypto.createHmac("sha256", process.env.SECRET);
+    shasum.update(password);
+    const encodedPassword = shasum.digest("hex");
+    res.json({
+        password,
+        encodedPassword
+    });
+}
+
+exports.changePassword = async (req, res) => {
+    const { username, password } = req.body;
+    const shasum = crypto.createHmac("sha256", process.env.SECRET);
+    shasum.update(password);
+    const encodedPassword = shasum.digest("hex");
+    const user = await User.updateOne({ username }, { password: encodedPassword, first_login: false });
+    if (user.ok) {
+        res.status(200).json({ message: 'Password Updated Successfully' });
+    } 
+    res.status(400).json({ message: 'Password not updated' });
+};
+
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     const shasum = crypto.createHmac("sha256", process.env.SECRET);
-
     shasum.update(password);
-
     const encodedPassword = shasum.digest("hex");
     const user = await User.findOne({
         username,
@@ -67,7 +90,6 @@ exports.authenticate = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    console.log(req.headers)
     const token = cookieToken(req);
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
@@ -80,3 +102,4 @@ exports.logout = (req, res) => {
         req.session.destroy();
     });
 };
+

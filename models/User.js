@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
     password: {
       type: String,
       required: "Password is required!",
+    },
+    first_login:{
+      type: Boolean,
+    },
+    applications: {
+      type: String
     }
   }
 );
