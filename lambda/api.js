@@ -9,6 +9,7 @@ require("dotenv").config();
 let origin = [
   "https://credq.org",
   "https://beta.credq.org",
+  "www.credq.org",
   "https://frontend-dev.credq.org"
 ];
 if (process.env.ENV === 'DEVELOPMENT') origin.push("http://localhost:3000");
