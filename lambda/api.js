@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 require("dotenv").config();
 let origin = [
   "https://credq.org",
+  "https://admiring-tereshkova-d6de1b.netlify.app",
   "https://beta.credq.org",
   "https://www.credq.org",
   "https://frontend-dev.credq.org"
