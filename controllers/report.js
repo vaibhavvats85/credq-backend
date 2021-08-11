@@ -4,6 +4,7 @@ const Requests = require('../models/Requests');
 const User = require("../models/User");
 const Reports = require("../models/Reports");
 const { nanoid } = require("nanoid");
+const appData = require("../models/appData");
 
 exports.updateApplications = async (req, res) => {
     const { username } = req.body;
@@ -23,6 +24,19 @@ exports.updateApplications = async (req, res) => {
             }
             res.status(400).json({ message: 'Application not updated' });
         })
+
+    });
+}
+
+exports.updateExcelData = async (req, res) => {
+    const { username } = req.body;
+    const token = cookieToken(req);
+    jwt.verify(token, process.env.SECRET, async (err,) => {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+        await appData.create({...req.body, member_id: nanoid(5)},(err, requests) => {
+            if (err) return res.status(500).send('Some problem occurred while creating your excel');
+            res.status(200).send('Your request has been sent. One of our team member will contact you shortly');
+        });
 
     });
 }

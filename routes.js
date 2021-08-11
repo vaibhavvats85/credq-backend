@@ -22,6 +22,7 @@ router.post("/payment/success", payment.success);
 router.post("/invoices", invoices.invoices);
 router.post("/request/upgradeplan", request.upgradeplan);
 router.post("/report/updateApplications", report.updateApplications);
+router.post("/report/updateExcelData", report.updateExcelData);
 router.post("/reports", report.reports);
 
 
