@@ -13,3 +13,4 @@ exports.cookieToken = (req) => {
     }
     return token;
 }
+

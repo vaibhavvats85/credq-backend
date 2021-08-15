@@ -6,6 +6,7 @@ const payment = require('./controllers/payment');
 const invoices = require('./controllers/invoice');
 const request = require('./controllers/request');
 const report = require('./controllers/report');
+const email = require('./controllers/email');
 
 router.get("/", (req, res) => {
     res.json({
@@ -22,8 +23,8 @@ router.post("/payment/success", payment.success);
 router.post("/invoices", invoices.invoices);
 router.post("/request/upgradeplan", request.upgradeplan);
 router.post("/report/updateApplications", report.updateApplications);
-router.post("/report/updateExcelData", report.updateExcelData);
 router.post("/reports", report.reports);
+router.post("/email", email.email);
 
 
-module.exports = router;
+module.exports = router;    
