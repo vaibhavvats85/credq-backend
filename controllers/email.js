@@ -6,3 +6,4 @@ exports.email = async (req, res) => {
   if (def === "Successful!") return  res.status(200).send(def);
   return res.status(400).send(def);
 };
+  
